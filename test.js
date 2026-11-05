@@ -1,0 +1,14 @@
+const C=require('./calc.js'),a=require('assert'),n=(x,y,e=1e-6)=>a.ok(Math.abs(x-y)<e,x+' != '+y);
+n(C.area('circulo',{r:1}),Math.PI);n(C.area('trapezio',{B:4,b:2,h:3}),9);n(C.area('losango',{D:4,d:3}),6);
+let p=C.piso(5,4,10,2.5,80);n(p.ap,22);a.equal(p.cx,9);n(p.custo,720);
+n(C.tinta(2.8,10,4,10,2).litros,4.8);n(C.vol('esfera',{r:1}),4/3*Math.PI);n(C.vol('prisma',{b:2,a:3,c:4}),12);
+let s=C.simples(1000,12,'a',24);n(s.J,240);n(C.simples(1000,1,'m',12).M,1120);
+n(C.compostos(1000,1,'m',12,0).M,1000*1.01**12);n(C.compostos(1000,12,'a',12,0).M,1120,1e-6);
+n(C.compostos(0,1,'m',12,100).M,100*(1.01**12-1)/.01);
+let pr=C.price(10000,1,12);n(pr.pmt,888.4878867,1e-6);n(pr.t[11][4],0,1e-6);
+let sc=C.sac(1200,1,12);n(sc.pmt,112);n(sc.juros,78);
+n(C.conv('temperatura',100,'°C','°F'),212);n(C.conv('comprimento',1,'mi','km'),1.609344);n(C.conv('area',1,'ha','m²'),1e4);
+let mg=C.margem(150,100);n(mg.l,50);n(mg.m,100/3);n(mg.mk,50);n(C.markup(100,50),150);n(C.mkDeMargem(20),25);
+n(C.precoMargem(100,15,25),100/0.6);let md=C.mkDiv(10,5,10,15);n(md.div,.6);n(md.mult,1/.6);n(C.descMax(200,150),25);
+let eq=C.equilibrio(10000,50,30);n(eq.u,500);n(eq.fat,25000);n(C.custoMedio([[10,5],[30,7]]).m,6.5);n(C.lucroQtd(10,15,9).l,60);
+console.log('OK todos os testes');
